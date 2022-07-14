@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Unofficial World Anvil CLI</title>
+  <link href="./style.css" rel="stylesheet" />
+</head>
+<body>
+  <h1 id="unofficial-world-anvil-cli" tabindex="-1">Unofficial World Anvil CLI</h1>
+  <p>This project was created using the <a href="https://github.com/jibstaman/worldnanvil-cli#readme">unofficial World Anvil CLI</a> (<a href="https://www.npmjs.com/package/@jibstasoft/worldanvil-cli">@jibstasoft/worldanvil-cli</a>).</p>
+  <h2 id="table-of-contents" tabindex="-1">Table of contents</h2>
+  <ul>
+  <li><a href="#cli">CLI</a></li>
+  <li><a href="#commands">Commands</a>
+  <ul>
+  <li><a href="#build">Build</a></li>
+  <li><a href="#watch">Watch</a></li>
+  <li><a href="#sub-commands">Sub-commands</a></li>
+  </ul>
+  </li>
+  <li><a href="#config">Config</a>
+  <ul>
+  <li><a href="#globs">Globs</a></li>
+  </ul>
+  </li>
+  <li><a href="#references">References</a></li>
+  </ul>
+  <h2 id="cli" tabindex="-1">CLI</h2>
+  <p>This command-line interface allows you to use advanced tools to increase your productivity:</p>
+  <ul>
+  <li><a href="https://github.com/jibstaman/worldanvil-cli/blob/main/docs/less">LESS</a>: use nesting for selectors and split your CSS up into multiple files
+  <ul>
+  <li>The CLI keeps <a href="https://www.worldanvil.com/w/WorldAnvilCodex/a/css#security">World Anvil’s Security Filter</a> in mind, informing you when you hit the filter.</li>
+  </ul>
+  </li>
+  <li><a href="https://twig.symfony.com/doc/3.x/templates.html">Twig</a> with <a href="https://github.com/jibstaman/worldanvil-cli/blob/main/docs/twig.md">custom functions</a>: create reusable Twig snippets to use in any of your custom article templates.</li>
+  <li>Use your favorite editor (e.g. free <a href="https://code.visualstudio.com/">Visual Studio Code</a> with <a href="https://marketplace.visualstudio.com/items?itemName=bajdzis.vscode-twig-pack">TWIG pack</a> plugin)</li>
+  </ul>
+  <h2 id="commands" tabindex="-1">Commands</h2>
+  <p>Add <code>--debug</code> to any command to have it log a lot more information. This can help you better understand what the CLI is doing if something isn’t working as expected.</p>
+  <p>The CLI does include <code>--help</code> option to get information about its usage, but since the commands are so straight-forward, you’ll likely never use it. You can also use <code>--help</code> for individual commands to get more information about the options for that specific command.</p>
+  <h3 id="build" tabindex="-1">Build</h3>
+  <p>“Build” means taking your source code files and compiling them into the desired output.</p>
+  <ul>
+  <li>In the case of LESS, it will generate a single <code>.css</code> file that you can copy-paste into World Anvil’s “World Styling Editor”.</li>
+  <li>In the case of templates, it will generate the Twig template output, with all function calls replaced, so you can copy-paste them into your custom article templates.</li>
+  </ul>
+  <p>To build your source code, you can run:</p>
+  <pre><code class="language-shell">npm build
+  </code></pre>
+  <p>Or you can run it through <code>npx</code>:</p>
+  <pre><code class="language-shell">npx @jibstasoft/worldanvil-cli build
+  </code></pre>
+  <p>Or double-click the <code>build.bat</code> file if you had the <code>init</code> command generate those.</p>
+  <h3 id="watch" tabindex="-1">Watch</h3>
+  <p>“Watch” means it will keep an eye on your files and when you save, create or delete a file, it will build the output automatically. Any errors will be logged, but will not end the process, allowing you to fix them and automatically have the output generated again. <strong>To stop the long-running process, press <code>Ctrl+C</code>.</strong></p>
+  <p>To watch your source code, you can run:</p>
+  <pre><code class="language-shell">npm start
+  </code></pre>
+  <p>Or you can run it through <code>npx</code>:</p>
+  <pre><code class="language-shell">npx @jibstasoft/worldanvil-cli watch
+  </code></pre>
+  <p>Or double-click the <code>watch.bat</code> file if you had the <code>init</code> command generate those.</p>
+  <h3 id="sub-commands" tabindex="-1">Sub-commands</h3>
+  <p>The following commands are the same as above, but for specific features. The commands above will check your config to determine whether you have CSS and/or Twig features enabled. The commands below will ignore those settings. So for example, if you have the Twig features disabled, <code>css build</code> and <code>build</code> will do exactly the same thing.</p>
+  <h4 id="css-build" tabindex="-1">CSS Build</h4>
+  <p>This command takes your LESS files and generates the CSS output. It ignores your Twig templates.</p>
+  <p>To build your LESS source code, you can run:</p>
+  <pre><code class="language-shell">npx @jibstasoft/worldanvil-cli css build
+  </code></pre>
+  <p>Or double-click the <code>cssBuild.bat</code> file if you had the <code>init</code> command generate those.</p>
+  <h4 id="css-watch" tabindex="-1">CSS Watch</h4>
+  <p>To watch your LESS source code, you can run:</p>
+  <pre><code class="language-shell">npx @jibstasoft/worldanvil-cli css watch
+  </code></pre>
+  <p>Or double-click the <code>cssWatch.bat</code> file if you had the <code>init</code> command generate those.</p>
+  <h4 id="twig-build" tabindex="-1">Twig Build</h4>
+  <p>This command takes your Twig templates, replace all function calls with the output of those functions and generates the templates output. It ignores your LESS code.</p>
+  <p>To build your Twig templates source code, you can run:</p>
+  <pre><code class="language-shell">npx @jibstasoft/worldanvil-cli twig build
+  </code></pre>
+  <p>Or double-click the <code>twigBuild.bat</code> file if you had the <code>init</code> command generate those.</p>
+  <h4 id="twig-watch" tabindex="-1">Twig Watch</h4>
+  <p>To watch your Twig templates source code, you can run:</p>
+  <pre><code class="language-shell">npx @jibstasoft/worldanvil-cli twig watch
+  </code></pre>
+  <p>Or double-click the <code>twigWatch.bat</code> file if you had the <code>init</code> command generate those.</p>
+  <h3 id="update" tabindex="-1">Update</h3>
+  <p>When there’s a new version of the CLI available, you can run this command to install the update. It’s probably a good idea to stop any running <code>watch</code> command using <code>Ctrl+C</code>.</p>
+  <p>The update command will ensure your environment stays current and accurate. This includes overwrite this documentation with the latest version. If the new version has an updated <code>waconfig.js</code>, it will take your config and apply it to the updated version.</p>
+  <pre><code class="language-shell">npx @jibstasoft/worldanvil-cli update
+  </code></pre>
+  <p>Or double-click the <code>update.bat</code> file if you had the <code>init</code> command generate those.</p>
+  <h2 id="config" tabindex="-1">Config</h2>
+  <p>The <code>waconfig.js</code> file has a lot of comments to help you understand each option. Below, the more advanced features are documented in greater detail.</p>
+  <h3 id="globs" tabindex="-1">Globs</h3>
+  <p>The CLI uses “globs” to determine where to find certain files. A <a href="https://github.com/isaacs/node-glob#glob-primer">glob</a> resembles a file path which allows for one or more files to be found.</p>
+  <h4 id="twig-templates-and-functions" tabindex="-1">Twig templates and functions</h4>
+  <p>For starters, let’s look at the default glob used for the Twig templates:</p>
+  <pre><code>templates: &quot;templates/*.twig&quot;
+  </code></pre>
+  <p>This will find any files ending with <code>.twig</code> within the <code>templates</code> folder, but will not look within any of its sub-folders (like <code>functions</code>).</p>
+  <p>Now let’s say you want to use sub-folders within the <code>templates</code> folder and <code>functions</code> folder.</p>
+  <pre><code>templates: &quot;templates/**/*.twig&quot;
+  functions: &quot;templates/functions/**/*.twig&quot;
+  </code></pre>
+  <p>Anything underneath <code>templates/functions</code> is seen as a function, as long as the file ends with the <code>.twig</code> extension. By using <code>**/*.twig</code>, it will find files both inside the <code>templates/functions</code> folder directly or any of its sub-folders (or their sub-folders, etc).</p>
+  <p>For the templates, we’re using the same pattern, which will also find everything underneath <code>functions</code>. However, the CLI will ensure any overlap is excluded, so templates will automatically exclude anything found by the <code>functions</code> glob.</p>
+  <p>You can use <code>--debug</code> when running a command (optionally add it yourself within the <code>.bat</code> files) to see what files the command finds. If the template and function globs find exactly the same files, the Twig commands will not find any files and won’t function anymore.</p>
+  <h2 id="references" tabindex="-1">References</h2>
+  <h3 id="docs" tabindex="-1">Docs</h3>
+  <ul>
+  <li><a href="https://github.com/jibstaman/worldanvil-cli/blob/main/docs/less.md">LESS quick start guide</a></li>
+  <li><a href="https://github.com/jibstaman/worldanvil-cli/blob/main/docs/twig.md">Twig custom functions guide</a></li>
+  <li><a href="https://github.com/jibstaman/worldanvil-cli/blob/main/CHANGELOG.md">Changelog</a></li>
+  </ul>
+  <h3 id="css" tabindex="-1">CSS</h3>
+  <ul>
+  <li><a href="https://lesscss.org/features/">LESS docs</a></li>
+  <li><a href="https://getbootstrap.com/docs/3.4/css/">Bootstrap v3.4</a>
+  <ul>
+  <li>World Anvil uses Bootstrap, which has a lot of CSS features you can use.</li>
+  </ul>
+  </li>
+  <li><a href="https://www.worldanvil.com/w/WorldAnvilCodex/a/css#the-rules">World Anvil CSS Rules</a></li>
+  <li><a href="https://www.worldanvil.com/w/WorldAnvilCodex/a/css-grandmasters">Container CSS</a> <em>(Grandmaster)</em>
+  <ul>
+  <li>Tips on using <code>[container:class][/container]</code> and <code>[section:class][/section]</code> elements.</li>
+  </ul>
+  </li>
+  <li><a href="https://www.dropbox.com/s/kxgqvscy7bchiik/Perillel%20CSS.css?dl=0">Example theme: Perillel</a></li>
+  <li><a href="https://www.worldanvil.com/w/cathedris-stormbril/a/stormbril-s-css-add-ons21-article">Stormbril CSS Add-ons</a></li>
+  </ul>
+  <h3 id="twig" tabindex="-1">Twig</h3>
+  <ul>
+  <li><a href="https://twig.symfony.com/doc/3.x/templates.html">Twig docs</a></li>
+  <li><a href="https://www.worldanvil.com/w/WorldAnvilCodex/a/block-template-filters-article">World Anvil custom Twig filters</a></li>
+  <li><a href="https://github.com/iamromeo/worldanvil-templates/tree/master/article-templates/base-template">Base World Anvil templates</a></li>
+  </ul>
+  <h3 id="other" tabindex="-1">Other</h3>
+  <ul>
+  <li><a href="https://fontawesome.com/icons">Font Awesome icons</a></li>
+  <li><a href="https://nagoshiashumari.github.io/Rpg-Awesome/">RPG Awesome icons</a></li>
+  </ul>
+  
+</body>
+</html>

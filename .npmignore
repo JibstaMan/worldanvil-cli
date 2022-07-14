@@ -1,0 +1,12 @@
+node_modules
+.idea
+/.editorconfig
+**/__tests__/**
+/assets/install.bat
+docs
+
+test
+proj
+output
+scripts
+waconfig.js

@@ -1,0 +1,52 @@
+// see README.html for more details
+module.exports = {
+  // The level of your membership
+  // master doesn't have access to Twig templates, so that feature will be disabled by default.
+  // sage or above members are allowed to change more through CSS, so some CSS validation is skipped.
+  // Possible values: master, grandmaster, sage, innerSanctum, legendary, deity
+  membershipTier: "{{ membershipTier }}",
+
+  css: {
+    // whether to build/watch CSS when running the generic build/watch commands
+    enabled: {{ css.enabled }},
+    // Presentation and Authoring Panel CSS can be found in https://www.worldanvil.com/world/styling
+    // and then opening the CSS tab
+    presentation: {
+      // the entry for the "Presentation" css
+      entry: "less/theme.less",
+      // the output path for where the "Presentation" css file should be written to
+      output: "build/theme.css",
+    },
+    authoringPanel: {
+      // the entry for the "Authoring Panel" css, use "" to skip
+      entry: "",
+      // the output path for where the "Authoring Panel" css file should be written to
+      output: "build/authoring-panel.css",
+    },
+    // [advanced] options to pass to LESS (https://lesscss.org/usage/#less-options)
+    lessOptions: {},
+  },
+
+  twig: {
+    // whether to build/watch Twig templates when running the generic build/watch commands
+    enabled: {{ twig.enabled }},
+    // the entry (glob) for your custom article templates
+    templates: "templates/*.twig",
+    // the entry (glob) for the reusable function templates
+    functions: "templates/functions/*.twig",
+    // the output directory to put the generated templates into
+    outputDir: "build/templates"
+  },
+
+  // whether to automatically check for updates when running commands
+  checkForUpdates: {{ checkForUpdates }},
+
+  /* Don't make changes to the following config, these are managed by the CLI itself */
+  /***********************************************************************************/
+  // the version when the config was last updated
+  // Note: not all updates require config changes, so this can mismatch the installed CLI version
+  version: "0.1",
+
+  // the version of the CLI
+  cliVersion: "{{ cliVersion }}"
+}

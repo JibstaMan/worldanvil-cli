@@ -1,0 +1,14 @@
+{
+  "name": "world-anvil-cli-project",
+  "description": "Unofficial World Anvil CLI project",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "worldanvil-cli watch",
+    "start:debug": "worldanvil-cli watch --debug",
+    "build": "worldanvil-cli build",
+    "build:debug": "worldanvil-cli build --debug"
+  },
+  "dependencies": {
+    "@jibstasoft/worldanvil-cli": "^1.0.0"
+  }
+}

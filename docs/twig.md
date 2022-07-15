@@ -363,9 +363,14 @@ We're using the good-looking "pass-through" parameter style, because `children` 
 Our last function is `articleRow`:
 ```html
 <$ function articleRow(article, world, label, content) $>
-<dt><$= label $></dt>
-<dd><$ articleLinkWithEdit(article, world, content) $></dd>
+<dt>
+  <$= label $>
+</dt>
+<dd>
+  <$ articleLinkWithEdit(article, world, content) $>
+</dd>
 ```
+Note how we put the `label` and `articleLinkWithEdit` function call on their own line. Because it will (potentially) be replaced with a multi-line HTML snippet, this creates the most pretty-printed output.
 
 So now that we have our function definitions, what can we do with it?
 
@@ -374,6 +379,25 @@ So now that we have our function definitions, what can we do with it?
 ```html
 <$ articleLink(article.species, article.world, {{ article.species }}) $>
 ```
+<details>
+  <summary>Check the Twig template output</summary>
+
+```html
+<a
+  href="{{ path('presentation_article', {
+    'articleslug': article.species.slug,
+    'worldslug': article.world.slug
+  }) }}"
+  class="article-link tooltipstered"
+  data-article-id="{{ article.species.id }}"
+  data-article="{{ article.species.id }}"
+  data-article-privacy="{{ article.species.state }}"
+  data-template-type="{{ article.species.slug|split('-')|last }}"
+>
+  {{ article.species }}
+</a>
+```
+</details>
 
 2. Mostly the same as 1, but this time the link text is lower-cased, e.g. instead of Elf, it would say elf.
 ```html
@@ -381,11 +405,62 @@ So now that we have our function definitions, what can we do with it?
 ```
 Using the lower-case can be interesting if you want to write a succinct intro line with pertinent details, without everything starting with a capital letter.
 
+<details>
+  <summary>Check the Twig template output</summary>
+
+```html
+<a
+  href="{{ path('presentation_article', {
+    'articleslug': article.species.slug,
+    'worldslug': article.world.slug
+  }) }}"
+  class="article-link tooltipstered"
+  data-article-id="{{ article.species.id }}"
+  data-article="{{ article.species.id }}"
+  data-article-privacy="{{ article.species.state }}"
+  data-template-type="{{ article.species.slug|split('-')|last }}"
+>
+  {{ article.species|lower }}
+</a>
+```
+</details>
+
 ### Simplistic article row example
 3. An article row with plain-text label and single-line Twig template.
 ```html
 <$ articleRow(article.species, article.world, Species, {{ article.species }}) $>
 ```
+<details>
+  <summary>Check the Twig template output</summary>
+
+```html
+<dt>
+  Species
+</dt>
+<dd>
+  <a
+    href="{{ path('presentation_article', {
+    'articleslug': article.species.slug,
+    'worldslug': article.world.slug
+  }) }}"
+    class="article-link tooltipstered"
+    data-article-id="{{ article.species.id }}"
+    data-article="{{ article.species.id }}"
+    data-article-privacy="{{ article.species.state }}"
+    data-template-type="{{ article.species.slug|split('-')|last }}"
+  >
+    {{ article.species }}
+  </a>
+  <a
+    href="/world/{{ article.species.slug|split('-')|last }}/{{ article.species.id }}/edit"
+    class="world-editor-link btn btn-xs btn-opaque btn-default"
+    style="display: none;"
+  >
+    <i class="fas fa-pencil" aria-hidden="true"></i>
+  </a>
+</dd>
+```
+</details>
 
 ### Article row with slot
 4. An article row with label determined by World Anvil's translation for species-type articles
@@ -397,6 +472,38 @@ Using the lower-case can be interesting if you want to write a succinct intro li
 <$ endslots $>
 ```
 Note that because we have `()` when using `trans`, it needs to be a slot.
+
+<details>
+  <summary>Check the Twig template output</summary>
+
+```html
+<dt>
+  {{ 'person.species'|trans({}, 'presentation') }}
+</dt>
+<dd>
+  <a
+    href="{{ path('presentation_article', {
+    'articleslug': article.species.slug,
+    'worldslug': article.world.slug
+  }) }}"
+    class="article-link tooltipstered"
+    data-article-id="{{ article.species.id }}"
+    data-article="{{ article.species.id }}"
+    data-article-privacy="{{ article.species.state }}"
+    data-template-type="{{ article.species.slug|split('-')|last }}"
+  >
+    {{ article.species }}
+  </a>
+  <a
+    href="/world/{{ article.species.slug|split('-')|last }}/{{ article.species.id }}/edit"
+    class="world-editor-link btn btn-xs btn-opaque btn-default"
+    style="display: none;"
+  >
+    <i class="fas fa-pencil" aria-hidden="true"></i>
+  </a>
+</dd>
+```
+</details>
 
 ### Article row with Twig templating
 5. An article row with Twig templating to determine the label
@@ -411,6 +518,42 @@ Species
 <$_ endslot $>
 <$ endslots $>
 ```
+
+<details>
+  <summary>Check the Twig template output</summary>
+
+```html
+<dt>
+  {% if article.species matches '/(Human|Elf|Dwarf|Halfling|Gnome|Half-Elf|Half-Orc|Dragonborn)/' %}
+  Race
+  {% else %}
+  Species
+  {% endif %}
+</dt>
+<dd>
+  <a
+    href="{{ path('presentation_article', {
+    'articleslug': article.species.slug,
+    'worldslug': article.world.slug
+  }) }}"
+    class="article-link tooltipstered"
+    data-article-id="{{ article.species.id }}"
+    data-article="{{ article.species.id }}"
+    data-article-privacy="{{ article.species.state }}"
+    data-template-type="{{ article.species.slug|split('-')|last }}"
+  >
+    {{ article.species }}
+  </a>
+  <a
+    href="/world/{{ article.species.slug|split('-')|last }}/{{ article.species.id }}/edit"
+    class="world-editor-link btn btn-xs btn-opaque btn-default"
+    style="display: none;"
+  >
+    <i class="fas fa-pencil" aria-hidden="true"></i>
+  </a>
+</dd>
+```
+</details>
 
 ### Article row with function call
 6. An article row with a function to determine the label
@@ -429,9 +572,38 @@ Template:
 <$ endslots $>
 ```
 
-Let's look in some detail at what happens within this template
-1. We're calling the `articleRow` function with label parameter being `t(person.species)`.
-3. All parameters will be inserted into the function body. This means that `<$= label $>` will be replaced with `t(person.species)`.
-4. All functions within the `articleRow` function body will be executed. So it will find `t(person.species)` within the context of `articleRow` function body, not as part of the slot (which is part of the `articleRow` function call). 
+<details>
+  <summary>Check the Twig template output</summary>
 
-So within `articleRow` function body, we go from `<$= label $>` to `t(person.species)` to `{{ 'person.species'|trans({}, 'presentation') }}`.
+```html
+<dt>
+  {{ 'person.species'|trans({}, 'presentation') }}
+</dt>
+<dd>
+  <a
+    href="{{ path('presentation_article', {
+    'articleslug': article.species.slug,
+    'worldslug': article.world.slug
+  }) }}"
+    class="article-link tooltipstered"
+    data-article-id="{{ article.species.id }}"
+    data-article="{{ article.species.id }}"
+    data-article-privacy="{{ article.species.state }}"
+    data-template-type="{{ article.species.slug|split('-')|last }}"
+  >
+    {{ article.species }}
+  </a>
+  <a
+    href="/world/{{ article.species.slug|split('-')|last }}/{{ article.species.id }}/edit"
+    class="world-editor-link btn btn-xs btn-opaque btn-default"
+    style="display: none;"
+  >
+    <i class="fas fa-pencil" aria-hidden="true"></i>
+  </a>
+</dd>
+```
+</details>
+
+Just a quick reminder about the function call order:
+1. Even though `t(person.species)` lacks indenting, the CLI will call it first. After all, it works from right to left, then bottom to top.
+2. So when it comes time to call `articleRow`, `t(person.species)` will already have been replaced with `{{ 'person.species'|trans({}, 'presentation') }}`.

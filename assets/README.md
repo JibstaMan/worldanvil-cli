@@ -15,7 +15,7 @@ This project was created using the [unofficial World Anvil CLI](https://github.c
 ## CLI
 
 This command-line interface allows you to use advanced tools to increase your productivity:
-- [LESS](https://github.com/jibstaman/worldanvil-cli/blob/main/docs/less): use nesting for selectors and split your CSS up into multiple files
+- [LESS](https://github.com/jibstaman/worldanvil-cli/blob/main/docs/less.md): use nesting for selectors and split your CSS up into multiple files
   - The CLI keeps [World Anvil's Security Filter](https://www.worldanvil.com/w/WorldAnvilCodex/a/css#security) in mind, informing you when you hit the filter.
 - [Twig](https://twig.symfony.com/doc/3.x/templates.html) with [custom functions](https://github.com/jibstaman/worldanvil-cli/blob/main/docs/twig.md): create reusable Twig snippets to use in any of your custom article templates.
 - Use your favorite editor (e.g. free [Visual Studio Code](https://code.visualstudio.com/) with [TWIG pack](https://marketplace.visualstudio.com/items?itemName=bajdzis.vscode-twig-pack) plugin)

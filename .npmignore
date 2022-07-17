@@ -4,6 +4,7 @@ node_modules
 **/__tests__/**
 /assets/install.bat
 docs
+coverage
 
 test
 proj

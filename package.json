@@ -23,6 +23,7 @@
   "scripts": {
     "start": "node bin/worldanvil-cli.js --help",
     "test": "jest",
+    "test:coverage": "jest --coverage",
     "mark": "node ./scripts/generateHtml"
   },
   "dependencies": {

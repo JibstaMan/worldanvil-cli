@@ -1,6 +1,6 @@
 {
   "name": "@jibstasoft/worldanvil-cli",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Unofficial CLI for WorldAnvil, making theming and custom templates easier.",
   "author": "JibstaMan",
   "homepage": "https://github.com/JibstaMan/worldanvil-cli#readme",

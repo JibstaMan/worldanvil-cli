@@ -238,6 +238,41 @@ For slots, the function definition mostly remains the same. You'll just need to 
   <h3>{{ 'person.savvies_ineptitudes'|trans({},'presentation') }}</h3>
   <p>{{ article.savviesIneptitudes|BBcode }}</p>
 {% endif %}
+<$_ slot social $>
+<h2>{{ 'person.social'|trans({},'presentation') }}</h2>
+{% if article.relations|length > 0 %}
+  <h3>{{ 'person.contacts_relations'|trans({},'presentation') }}</h3>
+  <p>{{ article.relations|BBcode }}</p>
+{% endif %}
+{% if article.family|length > 0 %}
+  <h3>{{ 'person.family_ties'|trans({},'presentation') }}</h3>
+  <p>{{ article.family|BBcode }}</p>
+{% endif %}
+<$ endslots $>
+```
+
+So there are a few things to note here:
+1. We have a new notation for slots: `<$_ slot paramName $>`. `paramName` should match the name used within the function _call_, so the `personality` slot will be used as the value for the first parameter.
+2. Everything between `<$_ slot personaliy $>` and `<$_ slot social $>` is used as value for the `personality` parameter. Everything between `<$_ slot social $>` and `<$ endslots $>` is used for the `social` parameter.
+3. Make sure your function call ends with `<$ endslots $>` to indicate where that specific function's slots end. This allows slot names to be used multiple times within the same template.
+
+_If you prefer to have explicit slot closing tags, you can use `<$_ endslot $>`. But we're lazy and the fewer characters we have to type, the better._
+
+<details>
+  <summary>Check how that would look</summary>
+
+```html
+<$ characterTabs(personality, social) $>
+<$_ slot personality $>
+<h2>{{ 'person.personality_characteristics'|trans({},'presentation') }}</h2>
+{% if article.motivation|length > 0 %}
+  <h3>{{ 'person.motivation'|trans({},'presentation') }}</h3>
+  <p>{{ article.motivation|BBcode }}</p>
+{% endif %}
+{% if article.savviesIneptitudes|length > 0 %}
+  <h3>{{ 'person.savvies_ineptitudes'|trans({},'presentation') }}</h3>
+  <p>{{ article.savviesIneptitudes|BBcode }}</p>
+{% endif %}
 <$_ endslot $>
 <$_ slot social $>
 <h2>{{ 'person.social'|trans({},'presentation') }}</h2>
@@ -252,11 +287,7 @@ For slots, the function definition mostly remains the same. You'll just need to 
 <$_ endslot $>
 <$ endslots $>
 ```
-
-So there are a few things to note here:
-1. We have a new notation for slots: `<$_ slot paramName $>`. `paramName` should match the name used within the function _call_, so `personality` will be used as the value for the first parameter.
-2. Slots need to specify where they end using `<$_ endslot $>`. Everything between `<$_ slot paramName $>` and `<$_ endslot $>` is the actual parameter value. You can use `()<>$` characters within slots without any problems.
-3. Make sure your function call ends with `<$ endslots $>` to indicate where that specific function's slots end. This allows slot names to be used multiple times within the same template.
+</details>
 
 ### The importance of whitespace
 
@@ -281,10 +312,8 @@ For HTML, the indent is optional. For slots, the indent is required (or at least
   <div class="functionCall2">
     Note the change in indent.
   </div>
-  <$_ endslot $>
   <$ endslots $>
 </div>
-<$_ endslot $>
 <$ endslots $>
 ```
 
@@ -305,7 +334,6 @@ Then the CLI will create an intermediate template where the most indented functi
     Note the change in indent.
   </div>
 </div>
-<$_ endslot $>
 <$ endslots $>
 ```
 
@@ -468,7 +496,6 @@ Using the lower-case can be interesting if you want to write a succinct intro li
 <$ articleRow(article.species, article.world, label, {{ article.species }}) $>
 <$_ slot label $>
 {{ 'person.species'|trans({}, 'presentation') }}
-<$_ endslot $>
 <$ endslots $>
 ```
 Note that because we have `()` when using `trans`, it needs to be a slot.
@@ -515,7 +542,6 @@ Race
 {% else %}
 Species
 {% endif %}
-<$_ endslot $>
 <$ endslots $>
 ```
 
@@ -568,7 +594,6 @@ Template:
 <$ articleRow(article.species, article.world, label, {{ article.species }}) $>
 <$_ slot label $>
 <$ t(person.species) $>
-<$_ endslot $>
 <$ endslots $>
 ```
 

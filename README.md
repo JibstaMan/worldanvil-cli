@@ -73,8 +73,10 @@ For more details about what you can change within the config file, check your pr
 
 ## Commands
 
+Once you have installed the CLI, you can use it either through the terminal or using the generated `.bat` files. To run a command in the terminal, start with `npx worldanvil-cli` followed by the command you want to execute. 
+
 Here is an overview of the commands that are currently available:
-- `init` - create a new project folder where you can use the CLI.
+- `init` - create a new project folder where you can use the CLI. _(This is the only command where you need to use `npx @jibstasoft/worldanvil-cli`)._
 - `update` - will automatically update the CLI to the latest version and update your `waconfig.js` if needed.
 - `build` - takes the source code and compiles it into the desired output.
 - `watch` - run `build` command whenever any of the files are saved.

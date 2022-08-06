@@ -4,15 +4,21 @@
 [![license](https://badgen.net/npm/license/@jibstasoft/worldanvil-cli)](https://github.com/JibstaMan/worldanvil-cli/blob/main/LICENSE)
 [![packagephobia](https://badgen.net/packagephobia/install/@jibstasoft/worldanvil-cli)](https://packagephobia.com/result?p=@jibstasoft/worldanvil-cli)
 
-Create a sort of developer environment for your World Anvil theme and/or templates.
+Create a sort of developer environment for your World Anvil theme and/or custom article templates.
 
-This command-line interface allows you to use advanced tools to increase your productivity:
-- [LESS](./docs/less): use nesting for selectors and split your CSS up into multiple files
+This command-line interface allows you to use **advanced tools to increase your productivity**:
+- [LESS](./docs/less.md): _It's CSS, with just a little more._
+  - Nest selectors, so you don't have to write them out every time
+  - Split your CSS up into multiple files
   - The CLI keeps [World Anvil's Security Filter](https://www.worldanvil.com/w/WorldAnvilCodex/a/css#security) in mind, informing you when you hit the filter.
-- [Twig](https://twig.symfony.com/doc/3.x/templates.html) with [custom functions](./docs/twig.md): create reusable Twig snippets to use in any of your custom article templates.
+- [Twig](https://twig.symfony.com/doc/3.x/templates.html)
+  - Use [custom functions](./docs/twig.md) to create reusable Twig snippets that can be used in any of your custom article templates.
+  - With "[slots](./docs/twig.md#slots-twig-template-as-parameter)", write functions using a component-like mental model and build your templates using these components.
 - Use your favorite editor (e.g. free [Visual Studio Code](https://code.visualstudio.com/) with [TWIG pack](https://marketplace.visualstudio.com/items?itemName=bajdzis.vscode-twig-pack) plugin)
 
-And hopefully more to come soon.
+Admittedly, using more tools adds complexity and indirection, which is definitely a trade-off. When your theme grows, or you have ambitious ideas with custom article templates, the tools available within World Anvil quickly becomes a limiting factor, maybe even demotivating. This CLI makes it possible to use advanced features and tools, completely outside of World Anvil, while the output can simply be copy-pasted into World Anvil. See this in action in the video below.
+
+![Tutorial](./docs/tutorial.gif)
 
 _Note: This CLI's LESS features are for Master Worldsmiths and above and the Twig features for Grandmaster Worldsmiths and above. The CLI will ask you for your membership tier, so it can disable certain features. Feel free to choose whichever tier you'd like._
 
@@ -22,6 +28,7 @@ _Note: This CLI's LESS features are for Master Worldsmiths and above and the Twi
 - [Installation](#installation)
 - [Config](#config)
 - [Commands](#commands)
+- [Troubleshooting](#troubleshooting)
 - [Limitations](#limitations)
 - [References](#references)
 

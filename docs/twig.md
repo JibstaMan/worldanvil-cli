@@ -13,7 +13,7 @@ Please remember that this function system is basically a templating language on 
   - [Function parameter styles](#function-parameter-styles)
 - [Slots: Twig template as parameter](#slots-twig-template-as-parameter)
   - [The importance of whitespace](#the-importance-of-whitespace)
-- [Example: articleRow with slots](#example-articlerow-with-slots)
+- [Advanced usage](#advanced-usage)
 
 ## Defining functions
 

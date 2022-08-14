@@ -5,7 +5,9 @@ node_modules
 /assets/install.bat
 docs
 coverage
+jest.config.js
 
+temp
 test
 proj
 output
